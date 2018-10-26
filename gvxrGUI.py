@@ -73,7 +73,7 @@ def main(argv):
             gvxr.setElement(label, gvxr.getElementName(Z));
             #gvxr.invertNormalVectors(label);
 
-        gvxr.moveToCentre();
+        #gvxr.moveToCentre();
 
 
         # Compute an X-ray image
