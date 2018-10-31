@@ -1,7 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
-import MaterialSelection
+
 import gvxrPython3 as gvxr
+
+import MaterialSelection
+import GeometricalTransformation
+
 
 class App:
     def __init__(self, anEnergy):
@@ -14,6 +18,7 @@ class App:
         self.energy_var.set(anEnergy);
         self.source_shape = tk.IntVar()
         self.energy_var.set(0);
+        self.selected_item = 0;
 
         MODES = [
                 ("None", 0),
@@ -65,6 +70,7 @@ class App:
 
         self.tree = ttk.Treeview(self.canvas, columns=("Children", "Material", "Density"))
         self.tree.bind("<Double-1>", self.OnDoubleClick)
+        self.tree.bind("<Button-1>", self.OnSingleClick)
 
         self.tree.heading("Children", text="Children");
         self.tree.heading("Material",       text="Material");
@@ -100,6 +106,8 @@ class App:
 
         self.root.after(10, self.idle)
 
+        self.geometrical_transformation = GeometricalTransformation.GeometricalTransformation(self.root, "root");
+
         self.root.mainloop()
 
     def setSourceShape(self):
@@ -124,10 +132,15 @@ class App:
         self.energy_label.config(text = selection)
 
 
-    def OnDoubleClick(self, event):
-        item = self.tree.identify('item', event.x, event.y)
+    def OnSingleClick(self, event):
+        self.selected_item = self.tree.identify('item', event.x, event.y)
+        text = self.tree.item(self.selected_item,"text");
+        print ("You selected ", text);
+        self.geometrical_transformation.updateWindowTitle(text);
 
-        text = self.tree.item(item,"text")
+    def OnDoubleClick(self, event):
+        self.OnSingleClick(event)
+
         if text == "root":
             print ("Ignore root")
         elif text == "":
@@ -165,7 +178,7 @@ class App:
                     gvxr.setDensity(text, float(material_selection.density.get()), "g/cm3");
                     print("?");
 
-                self.tree.item(item, values=(str(child_children), gvxr.getMaterialLabel(text), str(gvxr.getDensity(text))))
+                self.tree.item(self.selected_item, values=(str(child_children), gvxr.getMaterialLabel(text), str(gvxr.getDensity(text))))
 
                 x_ray_image = gvxr.computeXRayImage();
                 gvxr.displayScene()
