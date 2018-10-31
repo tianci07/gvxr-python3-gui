@@ -59,6 +59,29 @@ def main(argv):
         #gvxr.invertNormalVectors("armR");
         #gvxr.invertNormalVectors("chest");
 
+        node_label_set = [];
+        node_label_set.append('root');
+
+        # The list is not empty
+        while (len(node_label_set)):
+
+            # Get the last node
+            last_node = node_label_set[-1];
+
+            # Initialise the material properties
+            #print("Set ", label, "'s Hounsfield unit");
+            #gvxr.setHU(label, 1000)
+            Z = gvxr.getElementAtomicNumber("H");
+            gvxr.setElement(last_node, gvxr.getElementName(Z));
+
+            # Remove it from the list
+            node_label_set.pop();
+
+            # Add its Children
+            for i in range(gvxr.getNumberOfChildren(last_node)):
+                node_label_set.append(gvxr.getChildLabel(last_node, i));
+
+            '''
         for label in gvxr.getMeshLabelSet():
             print("Move ", label, " to the centre");
             #gvxr.moveToCentre(label);
@@ -66,13 +89,8 @@ def main(argv):
             #print("Move the mesh to the center");
             #gvxr.moveToCenter(label);
 
-            print("Set ", label, "'s Hounsfield unit");
-            gvxr.setHU(label, 1000)
-
-            Z = gvxr.getElementAtomicNumber("H");
-            gvxr.setElement(label, gvxr.getElementName(Z));
             #gvxr.invertNormalVectors(label);
-
+        '''
         #gvxr.moveToCentre();
 
 
