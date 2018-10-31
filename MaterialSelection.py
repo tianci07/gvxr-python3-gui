@@ -49,7 +49,7 @@ class MaterialSelection:
 
     def createWindow(self, aText):
         self.window = tk.Toplevel(self.root);
-        self.window.title("Set material properties of Node" + aText);
+        self.window.title("Set material properties of Node " + aText);
         self.buttonOK     = tk.Button(self.window, text="OK", command=self.clicOK)
         self.buttonCancel = tk.Button(self.window, text="Cancel", command=self.clicCancel)
         #self.buttonOK.grid(row=0,column=0, sticky=tk.W)
