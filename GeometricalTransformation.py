@@ -10,6 +10,7 @@ class GeometricalTransformation:
         self.selected_node = aText;
 
         self.rotation_dictionary = dict();
+        self.transformation_dictionary = dict();
 
         self.x_rotation_value = tk.IntVar()
         self.y_rotation_value = tk.IntVar()
@@ -75,6 +76,8 @@ class GeometricalTransformation:
         self.z_rotation_slider = tk.Scale(self.window, from_=-180, to=180, orient=tk.HORIZONTAL, variable=self.z_rotation_value, command=self.setZRotation)
         self.z_rotation_label = tk.Label(self.window)
 
+        self.button = tk.Button(self.window, text="Reset", command=self.setReset)
+
         self.x_rotation_slider.pack()
         self.x_rotation_label.pack()
 
@@ -84,26 +87,55 @@ class GeometricalTransformation:
         self.z_rotation_slider.pack()
         self.z_rotation_label.pack()
 
+        self.button.pack(anchor=tk.CENTER)
+
 
         #self.updateWidgetStatus();
 
     def setXRotation(self, event):
+        global x_ray_image;
+
         selection = "Rotation in X = " + str((self.x_rotation_value.get())) + ' degrees'
         self.x_rotation_label.config(text = selection)
         gvxr.rotateNode(self.selected_node, self.x_rotation_value.get() - self.rotation_dictionary[self.selected_node][0], 1, 0 ,0);
         self.rotation_dictionary[self.selected_node][0] = self.x_rotation_value.get();
+        x_ray_image = gvxr.computeXRayImage();
+        gvxr.displayScene()
 
     def setYRotation(self, event):
+        global x_ray_image;
+
         selection = "Rotation in Y = " + str((self.y_rotation_value.get())) + ' degrees'
         self.y_rotation_label.config(text = selection)
         gvxr.rotateNode(self.selected_node, self.y_rotation_value.get() - self.rotation_dictionary[self.selected_node][1], 0, 1 ,0);
         self.rotation_dictionary[self.selected_node][0] = self.y_rotation_value.get();
+        x_ray_image = gvxr.computeXRayImage();
+        gvxr.displayScene()
 
     def setZRotation(self, event):
+        global x_ray_image;
+
         selection = "Rotation in Z = " + str((self.z_rotation_value.get())) + ' degrees'
         self.z_rotation_label.config(text = selection)
         gvxr.rotateNode(self.selected_node, self.z_rotation_value.get() - self.rotation_dictionary[self.selected_node][2], 0, 0 ,1);
         self.rotation_dictionary[self.selected_node][0] = self.z_rotation_value.get();
+        x_ray_image = gvxr.computeXRayImage();
+        gvxr.displayScene()
+
+    def setReset(self):
+        print ("Reset roation of ", self.selected_node);
+        self.x_rotation_value.set(0);
+        self.y_rotation_value.set(0);
+        self.z_rotation_value.set(0);
+
+        self.setZRotation(0);
+        self.setYRotation(0);
+        self.setXRotation(0);
+
+        gvxr.setNodeTransformationMatrix(self.selected_node, self.transformation_dictionary[self.selected_node]);
+        x_ray_image = gvxr.computeXRayImage();
+        gvxr.displayScene()
+
 
     def updateWindowTitle(self, aSelectedNode):
         self.selected_node = aSelectedNode;
@@ -118,6 +150,12 @@ class GeometricalTransformation:
         else:
             print (self.selected_node, " is in the dictionary");
             print ("Its rotation angles are ", self.rotation_dictionary[self.selected_node])
+
+        # The node is not in the dictionary
+        if self.selected_node not in self.transformation_dictionary:
+            print (self.selected_node, " is not in the dictionary");
+            # Add the node to the dictionary
+            self.transformation_dictionary[self.selected_node] = gvxr.getNodeTransformationMatrix(self.selected_node);
 
         self.x_rotation_value.set(self.rotation_dictionary[self.selected_node][0]);
         self.y_rotation_value.set(self.rotation_dictionary[self.selected_node][1]);
