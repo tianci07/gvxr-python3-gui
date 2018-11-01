@@ -92,7 +92,7 @@ def main(argv):
             #gvxr.invertNormalVectors(label);
         '''
         #gvxr.moveToCentre();
-
+        gvxr.moveToCentre('root');
 
         # Compute an X-ray image
         #print("Compute an X-ray image");
