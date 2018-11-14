@@ -30,7 +30,7 @@ class DisplayXRay:
     def __init__(self, root):
 
         self.root = Tk.Tk()
-        #self.root.wm_title("X-ray Image")
+        self.root.wm_title("X-ray View")
 
         self.x_ray_image = 0;
 
@@ -51,18 +51,18 @@ class DisplayXRay:
         norm = colors.Normalize(vmin=self.x_ray_image.min(),vmax=self.x_ray_image.max())
         log_norm = colors.LogNorm(vmin=self.x_ray_image.min(),vmax=self.x_ray_image.max())
 
-        ax = self.fig.add_subplot(321)
+        ax = self.fig.add_subplot(211)
         self.im_plot1 = ax.imshow(self.x_ray_image, norm=norm, cmap="PuBu_r");
         self.fig.colorbar(self.im_plot1, ax=ax, extend='max');
         ax.set_title("X-ray image");
 
-        ax = self.fig.add_subplot(311)
+        '''ax = self.fig.add_subplot(311)
         self.im_plot2 = ax.imshow(self.x_ray_image, cmap="PuBu_r", norm=log_norm);
         self.fig.colorbar(self.im_plot2, ax=ax, extend='max');
-        ax.set_title("X-ray image (in log scale)");
+        ax.set_title("X-ray image (in log scale)");'''
 
 
-        ax = self.fig.add_subplot(313)
+        ax = self.fig.add_subplot(212)
         n, bins, patches =  ax.hist(self.x_ray_image.ravel(), bins=256, density=True, facecolor='g', alpha=0.75)
         ax.set_yscale("log")
         ax.set_title("Intensity histogram")
