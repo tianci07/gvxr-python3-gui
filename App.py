@@ -5,12 +5,17 @@ import gvxrPython3 as gvxr
 
 import MaterialSelection
 import GeometricalTransformation
+import DisplayXRay
 
 
 class App:
     def __init__(self, anEnergy):
         self.root = tk.Tk()
+
         self.canvas = tk.Canvas(self.root, width=480, height=800, background="blue")
+
+        self.xray_vis = DisplayXRay.DisplayXRay(self.canvas);
+
 
         self.rotation_var           = tk.DoubleVar()
         self.artefact_filtering_var = tk.IntVar()
@@ -121,12 +126,14 @@ class App:
 
         x_ray_image = gvxr.computeXRayImage();
         gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
     def setEnergy(self, event):
         global x_ray_image
         gvxr.setMonoChromatic(self.energy_var.get(), "MeV", 1);
         x_ray_image = gvxr.computeXRayImage();
         gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
         selection = "Energy = " + str((self.energy_var.get())) + ' MeV'
         self.energy_label.config(text = selection)
@@ -183,6 +190,7 @@ class App:
 
                 x_ray_image = gvxr.computeXRayImage();
                 gvxr.displayScene()
+                self.xray_vis.draw(x_ray_image);
 
                 #node_id = self.tree.insert(parent_id, 'end', text=child_label, values=(str(0), gvxr.getMaterialLabel(child_label)))
 
@@ -199,6 +207,8 @@ class App:
             gvxr.enableArtefactFilteringOnGPU();
 
         x_ray_image = gvxr.computeXRayImage();
+        gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
 
     def rotationScene(self, widget):
@@ -211,6 +221,7 @@ class App:
 
         x_ray_image = gvxr.computeXRayImage();
         gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
 
     def saveImage(self):

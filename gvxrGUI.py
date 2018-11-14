@@ -6,6 +6,10 @@
 import random
 import matplotlib
 import sys, argparse
+
+import matplotlib
+matplotlib.use("TkAgg")
+
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
@@ -14,14 +18,11 @@ import numpy as np
 import gvxrPython3 as gvxr
 import App
 
-backend = matplotlib.get_backend()
-if backend is 'agg':
-    print ("Change Matplotlib backend from", backend, "to", "TkAgg");
-    plt.switch_backend('TkAgg');
-    backend = matplotlib.get_backend()
-
+x_ray_image = 0;
 
 def main(argv):
+    global x_ray_image;
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-input", type=str, help="Input file (see http://assimp.sourceforge.net/main_features_formats.html for a list of supported file formats)")
     parser.add_argument("-unit",  type=str, help="Unit of length corresponding to the input", choices=["um", "mm", "cm", "dm", "m", "dam", "hm", "km"]);
@@ -100,19 +101,20 @@ def main(argv):
         #gvxr.enableArtefactFilteringOnGPU();
         # Not working anymore gvxr.enableArtefactFilteringOnGPU();
         # Not working anymore gvxr.enableArtefactFilteringOnCPU();
-        '''x_ray_image = np.array(gvxr.computeXRayImage());
-        x_ray_image -= 0.0799;
+        x_ray_image = np.array(gvxr.computeXRayImage());
+        '''x_ray_image -= 0.0799;
         x_ray_image /= 0.08 - 0.0799;
         plt.ioff();
         plt.imshow(x_ray_image, cmap="gray");
         plt.show()
-
-        gvxr.setShiftFilter(-0.0786232874);
-        gvxr.setScaleFilter(726.368958);
         '''
+        #gvxr.setShiftFilter(-0.0786232874);
+        #gvxr.setScaleFilter(726.368958);
+
 
 
         gvxr.displayScene()
+
         app = App.App(0.08);
 
 
