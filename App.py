@@ -14,7 +14,7 @@ class App:
 
         self.canvas = tk.Canvas(self.root, width=480, height=800, background="blue")
 
-        self.xray_vis = DisplayXRay.DisplayXRay(self.canvas);
+        self.xray_vis = DisplayXRay.DisplayXRay(self.root);
 
 
         self.rotation_var           = tk.DoubleVar()
@@ -111,7 +111,7 @@ class App:
 
         self.root.after(10, self.idle)
 
-        self.geometrical_transformation = GeometricalTransformation.GeometricalTransformation(self.root, "root");
+        self.geometrical_transformation = GeometricalTransformation.GeometricalTransformation(self.root, "root", self.xray_vis);
 
         self.root.mainloop()
 

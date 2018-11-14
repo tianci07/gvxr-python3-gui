@@ -1,12 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
 import gvxrPython3 as gvxr
+import DisplayXRay
 
 class GeometricalTransformation:
-    def __init__(self, root, aText):
+    def __init__(self, root, aText, XRayVis):
 
         self.root = root;
 
+        self.xray_vis = XRayVis;
+        
         self.selected_node = aText;
 
         self.rotation_dictionary = dict();
@@ -101,6 +104,7 @@ class GeometricalTransformation:
         self.rotation_dictionary[self.selected_node][0] = self.x_rotation_value.get();
         x_ray_image = gvxr.computeXRayImage();
         gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
     def setYRotation(self, event):
         global x_ray_image;
@@ -111,6 +115,7 @@ class GeometricalTransformation:
         self.rotation_dictionary[self.selected_node][0] = self.y_rotation_value.get();
         x_ray_image = gvxr.computeXRayImage();
         gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
     def setZRotation(self, event):
         global x_ray_image;
@@ -121,6 +126,7 @@ class GeometricalTransformation:
         self.rotation_dictionary[self.selected_node][0] = self.z_rotation_value.get();
         x_ray_image = gvxr.computeXRayImage();
         gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
     def setReset(self):
         print ("Reset roation of ", self.selected_node);
@@ -135,6 +141,7 @@ class GeometricalTransformation:
         gvxr.setNodeTransformationMatrix(self.selected_node, self.transformation_dictionary[self.selected_node]);
         x_ray_image = gvxr.computeXRayImage();
         gvxr.displayScene()
+        self.xray_vis.draw(x_ray_image);
 
 
     def updateWindowTitle(self, aSelectedNode):

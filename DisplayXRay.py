@@ -11,6 +11,7 @@ matplotlib.use("TkAgg")
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import matplotlib.colors as colors
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
@@ -38,53 +39,65 @@ class DisplayXRay:
     def draw(self, x_ray_image):
         self.x_ray_image = np.copy(x_ray_image);
 
-        #self.x_ray_image = np.multiply(np.divide(np.subtract(x_ray_image, self.x_ray_image.min()),
-        #        self.x_ray_image.max() - self.x_ray_image.min()), 255);
-        #if self.has_been_drawn:
-        #    self.fig.clear();
-
-
         if not self.has_been_drawn:
             self.fig = Figure(figsize=(5, 8), dpi=100)
-            ax = self.fig.add_subplot(211)
-            self.im_plot = ax.imshow(self.x_ray_image, cmap="gray");
-            self.fig.colorbar(self.im_plot);
-            ax.set_title("X-ray image");
 
-            ax = self.fig.add_subplot(212)
-            n, bins, patches =  ax.hist(self.x_ray_image.ravel(), bins=256, density=True, facecolor='g', alpha=0.75)
-            ax.set_yscale("log")
-            ax.set_title("Intensity histogram")
-            ax.set_xlabel("Intensity")
-            ax.set_ylabel("Frequency")
+        #self.x_ray_image = np.multiply(np.divide(np.subtract(x_ray_image, self.x_ray_image.min()),
+        #        self.x_ray_image.max() - self.x_ray_image.min()), 255);
+        if self.has_been_drawn:
+            print("redraw")
+            self.fig.clear();
+
+        norm = colors.Normalize(vmin=self.x_ray_image.min(),vmax=self.x_ray_image.max())
+        log_norm = colors.LogNorm(vmin=self.x_ray_image.min(),vmax=self.x_ray_image.max())
+
+        ax = self.fig.add_subplot(321)
+        self.im_plot1 = ax.imshow(self.x_ray_image, norm=norm, cmap="PuBu_r");
+        self.fig.colorbar(self.im_plot1, ax=ax, extend='max');
+        ax.set_title("X-ray image");
+
+        ax = self.fig.add_subplot(311)
+        self.im_plot2 = ax.imshow(self.x_ray_image, cmap="PuBu_r", norm=log_norm);
+        self.fig.colorbar(self.im_plot2, ax=ax, extend='max');
+        ax.set_title("X-ray image (in log scale)");
+
+
+        ax = self.fig.add_subplot(313)
+        n, bins, patches =  ax.hist(self.x_ray_image.ravel(), bins=256, density=True, facecolor='g', alpha=0.75)
+        ax.set_yscale("log")
+        ax.set_title("Intensity histogram")
+        ax.set_xlabel("Intensity")
+        ax.set_ylabel("Frequency")
+
+        if not self.has_been_drawn:
 
             #ax.title("Intensity histogram of X-ray image");
 
             # a tk.DrawingArea
-            canvas = FigureCanvasTkAgg(self.fig, master=self.root)
-            canvas.draw()
-            canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+            self.canvas = FigureCanvasTkAgg(self.fig, master=self.root)
 
-            toolbar = NavigationToolbar2Tk(canvas, self.root)
-            toolbar.update()
-            canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+            self.toolbar = NavigationToolbar2Tk(self.canvas, self.root)
+            self.toolbar.update()
 
-            canvas.mpl_connect('key_press_event', self.on_key_event)
+            self.canvas.mpl_connect('key_press_event', self.on_key_event)
 
-            button = Tk.Button(master=self.root, text='Quit', command=self._quit)
-            button.pack(side=Tk.BOTTOM)
+            self.button = Tk.Button(master=self.root, text='Quit', command=self._quit)
 
             self.has_been_drawn = True;
         #else:
 
             #self.im_plot.set_data(self.x_ray_image)
-            #self.fig.canvas.draw()
-            #self.fig.canvas.flush_events()
+        self.canvas.draw()
+        self.canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+        self.canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
+        self.button.pack(side=Tk.BOTTOM)
+        #self.fig.canvas.draw()
+        #self.fig.canvas.flush_events()
 
 
     def on_key_event(self, event):
         print('you pressed %s' % event.key)
-        key_press_handler(event, canvas, toolbar)
+        key_press_handler(event, self.canvas, self.toolbar)
 
     def _quit(self):
         self.root.quit()     # stops mainloop
