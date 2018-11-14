@@ -49,16 +49,14 @@ class DisplayXRay:
             ax = self.fig.add_subplot(211)
             self.im_plot = ax.imshow(self.x_ray_image, cmap="gray");
             self.fig.colorbar(self.im_plot);
-            #self.fig.title("X-ray image");
+            ax.set_title("X-ray image");
 
             ax = self.fig.add_subplot(212)
-            print (self.x_ray_image.min(), self.x_ray_image.max());
-
             n, bins, patches =  ax.hist(self.x_ray_image.ravel(), bins=256, density=True, facecolor='g', alpha=0.75)
             ax.set_yscale("log")
-
-            print (n);
-            print (bins);
+            ax.set_title("Intensity histogram")
+            ax.set_xlabel("Intensity")
+            ax.set_ylabel("Frequency")
 
             #ax.title("Intensity histogram of X-ray image");
 
