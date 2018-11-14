@@ -141,44 +141,44 @@ class App:
     def OnDoubleClick(self, event):
         self.OnSingleClick(event)
 
-        if text == "root":
+        if self.selected_item == "root":
             print ("Ignore root")
-        elif text == "":
+        elif self.selected_item == "":
             print ("Ignore empty name")
         else:
-            print("you clicked on", text)
+            print("you clicked on", self.selected_item)
 
-            material_selection = MaterialSelection.MaterialSelection(self.root, text, gvxr.getMaterialLabel(text), gvxr.getDensity(text));
-            child_children = gvxr.getNumberOfChildren(text);
+            material_selection = MaterialSelection.MaterialSelection(self.root, self.selected_item, gvxr.getMaterialLabel(self.selected_item), gvxr.getDensity(self.selected_item));
+            child_children = gvxr.getNumberOfChildren(self.selected_item);
 
             if material_selection.cancel == False:
                 global x_ray_image;
 
                 # Element
                 if material_selection.materialType.get() == 0:
-                    gvxr.setElement(text, material_selection.element_name.get());
-                    gvxr.setDensity(text, float(material_selection.density.get()), "g/cm3");
+                    gvxr.setElement(self.selected_item, material_selection.element_name.get());
+                    gvxr.setDensity(self.selected_item, float(material_selection.density.get()), "g/cm3");
                 # Mixture
                 elif material_selection.materialType.get() == 1:
-                    gvxr.setMixture(text, material_selection.mixture.get());
-                    gvxr.setDensity(text, float(material_selection.density.get()), "g/cm3");
+                    gvxr.setMixture(self.selected_item, material_selection.mixture.get());
+                    gvxr.setDensity(self.selected_item, float(material_selection.density.get()), "g/cm3");
                 # Compound
                 elif material_selection.materialType.get() == 2:
-                    gvxr.setCompound(text, material_selection.compound.get());
-                    gvxr.setDensity(text, float(material_selection.density.get()), "g/cm3");
+                    gvxr.setCompound(self.selected_item, material_selection.compound.get());
+                    gvxr.setDensity(self.selected_item, float(material_selection.density.get()), "g/cm3");
                 # Hounsfield unit
                 elif material_selection.materialType.get() == 3:
-                    gvxr.setHU(text, material_selection.hounsfield_value.get());
+                    gvxr.setHU(self.selected_item, material_selection.hounsfield_value.get());
                 # Mass attenuation coefficient
                 elif material_selection.materialType.get() == 4:
-                    gvxr.setDensity(text, float(material_selection.density.get()), "g/cm3");
+                    gvxr.setDensity(self.selected_item, float(material_selection.density.get()), "g/cm3");
                     print("?");
                 # Linear attenuation coefficient
                 elif material_selection.materialType.get() == 5:
-                    gvxr.setDensity(text, float(material_selection.density.get()), "g/cm3");
+                    gvxr.setDensity(self.selected_item, float(material_selection.density.get()), "g/cm3");
                     print("?");
 
-                self.tree.item(self.selected_item, values=(str(child_children), gvxr.getMaterialLabel(text), str(gvxr.getDensity(text))))
+                self.tree.item(self.selected_item, values=(str(child_children), gvxr.getMaterialLabel(self.selected_item), str(gvxr.getDensity(self.selected_item))))
 
                 x_ray_image = gvxr.computeXRayImage();
                 gvxr.displayScene()
