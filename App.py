@@ -7,6 +7,9 @@ import MaterialSelection
 import GeometricalTransformation
 import DisplayXRay
 
+# Or RGB hex values instead of lists:
+def toHex(aColour):
+    return ''.join(["%02x" % e for e in aColour])
 
 class App:
     def __init__(self, anEnergy):
@@ -100,7 +103,29 @@ class App:
                 child_label = gvxr.getChildLabel(parent_label, i);
                 child_children = gvxr.getNumberOfChildren(child_label);
 
-                node_id = self.tree.insert(parent_id, 'end', text=child_label, values=(str(0), gvxr.getMaterialLabel(child_label), str(gvxr.getDensity(child_label))))
+                node_id = self.tree.insert(parent_id,
+                        'end',
+                        text=child_label,
+                        values=(str(0), gvxr.getMaterialLabel(child_label), str(gvxr.getDensity(child_label))),
+                        tag=child_label);
+
+                # Get the mesh colour in float
+                colour_float = gvxr.getAmbientColour(child_label)[0:3];
+
+                # Convert it in UCHAR
+                colour_int = [int(i * 255) for i in colour_float];
+
+                # Convert it in HTML
+                hex_colour= toHex(colour_int);
+                foreground = '#' + hex_colour;
+                background="#ffffff"
+
+                if colour_int[0] > 128 and colour_int[1] > 128 and colour_int[2] > 128:
+                    background="#aaaaaa"
+
+                # Set the corresponding line colour in the tree
+                self.tree.tag_configure(child_label, foreground=foreground)
+                self.tree.tag_configure(child_label, background=background)
 
                 if child_children:
                     list_of_parents.append((child_label, node_id));
