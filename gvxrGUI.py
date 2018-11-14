@@ -74,6 +74,7 @@ def main(argv):
             #gvxr.setHU(label, 1000)
             Z = gvxr.getElementAtomicNumber("H");
             gvxr.setElement(last_node, gvxr.getElementName(Z));
+            gvxr.setColour(last_node, random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1), 1.0);
 
             # Remove it from the list
             node_label_set.pop();
