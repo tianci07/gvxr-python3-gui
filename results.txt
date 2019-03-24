@@ -1,0 +1,152 @@
+gvxrStatus:	Create window 0
+0 0 500 500
+OpenGL renderer:   GeForce GTX 1070 Ti/PCIe/SSE2
+OpenGL version:    4.6.0 NVIDIA 415.27
+OpenGL vender:     NVIDIA Corporation
+Use OpenGL 3.2 or above.
+0 0 512 512
+INIT RENDER
+MaxScene	3	0
+$ColladaAutoName$_0	0	0
+node-Bones	9	0
+node-Bo_Wrist	5	0
+node-Bo_Lit	1	0
+node-Bo_Lit_Meta	1	0
+node-Bo_Lit_Prox	1	0
+node-Bo_Lit_Midd	1	0
+node-Bo_Lit_Dist	0	0
+node-Bo_Thi	1	0
+node-Bo_Thi_Meta	1	0
+node-Bo_Thi_Prox	1	0
+node-Bo_Thi_Midd	1	0
+node-Bo_Thi_Dist	0	0
+node-Bo_Middle	1	0
+node-Bo_Mid_Meta	1	0
+node-Bo_Mid_Prox	1	0
+node-Bo_Mid_Midd	1	0
+node-Bo_Mid_Dist	0	0
+node-Bo_Index	1	0
+node-Bo_Ind_Meta	1	0
+node-Bo_Ind_Midd	1	0
+node-Bo_Ind_Prox	1	0
+node-Bo_Ind_Dist	0	0
+node-Thumb	1	0
+node-Bo_Thu_Meta	1	0
+node-Bo_Thu_Proxi	1	0
+node-Bone005	0	0
+node-Bo_Lunate_Helper	1	0
+node-Bo_Lunate	0	0
+node-Bo_Pisiform_Helper	1	0
+node-Bo_Pisiform	0	0
+node-Bo_Scaphoid_Helper	1	0
+node-Bo_Scaphoid	0	0
+node-Bo_Trapeziu_Helper	1	0
+node-Bo_Trapeziu	0	0
+node-Bo_Triangul_Helper	1	0
+node-Bo_Triangul	0	0
+node-Bo_Capitate_Helper	1	0
+node-Bo_Capitate	0	0
+node-Bo_Hamate_Helper	1	0
+node-Bo_Hamate	0	0
+node-Bo_Trapezio_Helper	1	0
+node-Bo_Trapezio	0	0
+node-Geometry	13	0
+node-Trapezio	0	1
+node-Hamate	0	1
+node-Trapeziu	0	1
+node-Pisiform	0	1
+node-Ind_Meta	1	1
+node-Ind_Prox	1	1
+node-Ind_Midd	1	1
+node-Ind_Dist	0	1
+node-Capitate	0	1
+node-Mid_Meta	1	1
+node-Mid_Prox	1	1
+node-Mid_Midd	1	1
+node-Mid_Dist	0	1
+node-Thi_Meta	1	1
+node-Thi_Prox	1	1
+node-Thi_Midd	1	1
+node-Thi_Dist	0	1
+node-Lit_Meta	1	1
+node-Lit_Prox	1	1
+node-Lit_Midd	1	1
+node-Lit_Dist	0	1
+node-Scaphoid	0	1
+node-Lunate	0	1
+node-Triangul	0	1
+node-Thu_Meta	1	1
+node-Thu_Prox	1	1
+node-Thu_Dist	0	1
+0 0 512 512
+Create an OpenGL context
+Set up the beam
+Set up the detector
+Load the data
+Optimising... using Random Search!
+Better parameters found, updating...
+Metrics: 0.0029
+Parameters:  [0.9116158829201385, 755, -110, 48, -106, -94, -78, 151, 7, -21, 137, -77, -165, 19, -14, 101, 122, 112, -97, 118, 71, -24, -52, -170, -111, -12, -40, -145, -92, -13, 160, 0, -106, 27, -7, 180, 100, -163, -157, 9, 15, -109]
+Better parameters found, updating...
+Metrics: 0.0027
+Parameters:  [0.6290875329449955, 52, -41, -104, 105, 20, 0, 127, -65, 114, 118, 107, -71, 140, 151, -132, 94, 175, -160, 51, -88, -55, -147, -50, 135, 166, 161, 123, 140, 22, 146, 103, -158, -73, -143, -155, 146, 2, -119, 117, -148, 149]
+Better parameters found, updating...
+Metrics: 0.0024
+Parameters:  [0.7419711131087623, 403, 119, 0, -137, -25, -110, -15, 125, 171, -162, -56, 137, 106, -43, 123, -39, -24, 151, 75, -156, 121, -21, -98, 18, 163, 0, 43, 118, 25, 150, 147, 32, -7, -83, -3, -152, -134, 92, 153, -57, 165]
+Better parameters found, updating...
+Metrics: 0.0022
+Parameters:  [0.2569662176585015, 788, -44, -32, 152, -20, -60, 96, -177, -142, 91, -20, -39, 69, 142, 165, 161, 10, 63, -88, -168, -15, 127, -12, 69, -109, 101, -143, 14, 68, -79, -40, 33, 158, -67, 92, -51, 17, -134, -108, 96, -74]
+Better parameters found, updating...
+Metrics: 0.0020
+Parameters:  [0.07992167042296217, 770, -2, -33, 14, 72, -32, -130, 152, -176, 9, 18, -78, 136, 76, -14, -13, 131, -141, 14, -53, -80, -170, 79, 160, -100, 85, 154, -39, 58, -112, 110, -92, 35, -77, -145, 48, -52, -126, 5, 41, -36]
+Iterations: 100 
+Better parameters found, updating...
+Metrics: 0.0020
+Parameters:  [0.11773532322881053, 113, 34, -112, 135, -127, 132, -134, -16, -162, 174, -14, -105, -111, 46, 158, 8, 108, 104, -30, -171, 109, -114, 136, -45, 119, 17, 127, -120, -124, -46, 21, -156, 127, -46, -37, 46, -70, 100, 21, 4, -46]
+Iterations: 200 
+Iterations: 300 
+Iterations: 400 
+Better parameters found, updating...
+Metrics: 0.0020
+Parameters:  [0.14529128072908837, 442, 104, -69, -172, -54, 125, 133, -144, -155, 71, -80, -158, 146, 86, -131, -134, -97, 162, 98, 178, -81, 123, 48, 157, -122, 20, -24, 154, 86, 173, -159, -29, -117, 155, 155, 7, 130, -106, 160, -68, -113]
+Iterations: 500 
+Iterations: 600 
+Iterations: 700 
+Iterations: 800 
+Better parameters found, updating...
+Metrics: 0.0019
+Parameters:  [0.09146832906244873, 245, -173, 17, 77, -174, 132, -33, -166, 30, 154, -51, -50, -76, -113, 173, 71, -42, 50, 95, -148, 23, -180, -160, 46, 156, -34, 178, -136, -3, 52, -88, -72, 173, 50, -19, -141, -3, 61, -106, 167, -106]
+Iterations: 900 
+Time: 118
+Error is 0.0019
+gvxrStatus:	Quit and destroy all the windows
+gvxrStatus:	Destroy all the windows
+gvxrStatus:	Destroy window 0(0x23c4890)
+Delete node: root
+Delete node: node-Trapezio
+Delete node: node-Hamate
+Delete node: node-Trapeziu
+Delete node: node-Pisiform
+Delete node: node-Ind_Meta
+Delete node: node-Ind_Prox
+Delete node: node-Ind_Midd
+Delete node: node-Ind_Dist
+Delete node: node-Capitate
+Delete node: node-Mid_Meta
+Delete node: node-Mid_Prox
+Delete node: node-Mid_Midd
+Delete node: node-Mid_Dist
+Delete node: node-Thi_Meta
+Delete node: node-Thi_Prox
+Delete node: node-Thi_Midd
+Delete node: node-Thi_Dist
+Delete node: node-Lit_Meta
+Delete node: node-Lit_Prox
+Delete node: node-Lit_Midd
+Delete node: node-Lit_Dist
+Delete node: node-Scaphoid
+Delete node: node-Lunate
+Delete node: node-Triangul
+Delete node: node-Thu_Meta
+Delete node: node-Thu_Prox
+Delete node: node-Thu_Dist
